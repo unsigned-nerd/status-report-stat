@@ -22,5 +22,7 @@ class MyUnitTest(unittest.TestCase):
         # calling the script without an argument
         argv = (script_name, )
 
+        status_report_stat._run(argv)
+
 if __name__ == '__main__':
     unittest.main()
