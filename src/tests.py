@@ -24,5 +24,28 @@ class MyUnitTest(unittest.TestCase):
 
         status_report_stat._run(argv)
 
+    def test_canshowhelpmsg(self):
+        """
+        If user calls our script without any argument or incorrect
+        number of expected arguments, shows a help message.  Like this:
+
+          $ python3 status_report_stat.py
+          Usage: python3 status_report_stat.py [STATUS_REPORT_FILE]
+        """
+
+        # sys.argv[0] is the script name
+        script_name = 'status_report_stat.py'
+
+        # will call the script without an argument
+        argv = (script_name, )
+
+        # calling the script
+        stdout_msg = status_report_stat._run(argv)
+
+        expected_stdout_msg = \
+          'Usage: python3 status_report_stat [STATUS_REPORT_FILE]'
+
+        self.assertEqual(expected_stdout_msg, stdout_msg)
+
 if __name__ == '__main__':
     unittest.main()
