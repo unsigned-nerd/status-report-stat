@@ -47,5 +47,15 @@ class MyUnitTest(unittest.TestCase):
 
         self.assertEqual(expected_stdout_msg, stdout_msg)
 
+        # If we call the script with an argument, it will not print a
+        # help message.
+
+        argv = (script_name, 'some_argument',)
+
+        # calling the script
+        stdout_msg = status_report_stat._run(argv)
+
+        self.assertEqual(None, stdout_msg)
+
 if __name__ == '__main__':
     unittest.main()
