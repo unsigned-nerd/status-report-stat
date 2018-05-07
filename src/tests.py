@@ -38,6 +38,16 @@ class MyUnitTest(unittest.TestCase):
 
         self.assertEqual(None, stdout_msg)
 
+    def test_cancountnoofdays(self):
+        """
+        test that we can count number of logged days from the status
+        report input file
+        """
+
+        infile = 'test/status_report.00'
+
+        self.assertEqual(status_report_stat.getnoofdays(infile), 3)
+
         self.fail('Finish the test!')
 
 if __name__ == '__main__':
