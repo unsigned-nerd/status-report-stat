@@ -38,5 +38,7 @@ class MyUnitTest(unittest.TestCase):
 
         self.assertEqual(None, stdout_msg)
 
+        self.fail('Finish the test!')
+
 if __name__ == '__main__':
     unittest.main()
