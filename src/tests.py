@@ -73,7 +73,9 @@ class MyUnitTest(unittest.TestCase):
             False, False, False, False, False,
             False, False, False, True, False,
             False, False, False, False, False,
-            False, False, False, True, False
+            False, False, False, True, False,
+            False, False, False, False, False,
+            False, False
         )
 
         with open(infile) as infile:
