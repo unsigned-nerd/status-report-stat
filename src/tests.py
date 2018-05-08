@@ -48,6 +48,40 @@ class MyUnitTest(unittest.TestCase):
 
         self.assertEqual(status_report_stat.getnoofdays(infile), 3)
 
+    def test_cancheckifitisataskcategoryline(self):
+        """
+        test that the specified line is a task category line
+        """
+
+        infile = 'test/status_report.00'
+
+        expected_result = (
+            False, False, False, False, True,
+            False, False, False, False, False,
+            False, True, False, False, False,
+            False, False, True, False, False,
+            False, False, False, False, False,
+            False, False, True, False, False,
+            False, False, False, False, False,
+            False, True, False, False, False,
+            False, False, False, False, False,
+            False, True, False, False, False,
+            False, False, False, False, False,
+            False, True, False, False, False,
+            False, False, False, False, False,
+            False, False, False, True, False,
+            False, False, False, False, False,
+            False, False, False, True, False,
+            False, False, False, False, False,
+            False, False, False, True, False
+        )
+
+        with open(infile) as infile:
+            for index, line in enumerate(infile):
+                self.assertEqual(
+                        status_report_stat.istaskcategoryline(line),
+                        expected_result[index])
+
         self.fail('Finish the test!')
 
 if __name__ == '__main__':

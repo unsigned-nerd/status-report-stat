@@ -2,6 +2,15 @@
 A tool to generate some statistical report from a plain text daily
 status report file of a certain format
 
+## definitions
+
+### task category
+There are 4 task categories:
+  - non-work
+  - non-computer related work
+  - project management
+  - computer related work
+
 ## sample output
 
 ~~~~
