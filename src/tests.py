@@ -84,6 +84,44 @@ class MyUnitTest(unittest.TestCase):
                         status_report_stat.istaskcategoryline(line),
                         expected_result[index])
 
+    def test_cangethoursfromtimeestimationline(self):
+        """
+        test that we can extract the work hours from the time estimation
+        line
+        """
+
+        infile = 'test/status_report.00'
+
+        expected_result = (
+            None, None, None, None, None,
+            None, None, None, 0.5, None,
+            None, None, None, None, 2,
+            None, None, None, None, None,
+            0.5, None, None, None, 0.5,
+            None, None, None, None, None,
+            None, 2, None, None, None,
+            None, None, None, None, 1.5,
+            None, None, None, 2, None,
+            None, None, None, None, 0.5,
+            None, None, None, 0.5, None,
+            None, None, None, None, 1,
+            None, None, None, 2, None,
+            None, None, None, None, None,
+            None, 0.5, None, None, None,
+            1, None, None, None, None,
+            None, 2, None, None, None,
+            0.5, None, None, None, None,
+            None, None, None, None, None,
+            None, 4, None, None, None,
+            0.5, None
+        )
+
+        with open(infile) as infile:
+            for index, line in enumerate(infile):
+                self.assertEqual(
+                    status_report_stat.getworkhours(line),
+                    expected_result[index])
+
         self.fail('Finish the test!')
 
 if __name__ == '__main__':
