@@ -16,6 +16,22 @@ def istaskcategoryline(line):
         'project management', 'computer related work')
     return line.rstrip() in task_category_tuple
 
+def getworkhours(line):
+    """
+    get work hours from the line string
+
+    e.g. line = ' time estimation: 0.5 hour(s)', work hours is 0.5
+    """
+
+    time_estimation_line_regex = re.compile(
+        "\s*time estimation:\s*(\d*[.]?\d*)\s*")
+    result = re.match(time_estimation_line_regex, line)
+
+    if result is None:
+        return None
+    else:
+        return float(result.group(1))
+
 def _run(argv):
     if len(argv) == 1:
         return 'Usage: python3 status_report_stat [STATUS_REPORT_FILE]'
