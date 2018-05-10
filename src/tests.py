@@ -111,7 +111,6 @@ class MyUnitTest(unittest.TestCase):
             1, None, None, None, None,
             None, 2, None, None, None,
             0.5, None, None, None, None,
-            None, None, None, None, None,
             None, 4, None, None, None,
             0.5, None
         )
