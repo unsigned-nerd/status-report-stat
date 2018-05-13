@@ -121,6 +121,29 @@ class MyUnitTest(unittest.TestCase):
                     status_report_stat.getworkhours(line),
                     expected_result[index])
 
+    def test_count_work_hours_for_each_category(self):
+        """
+        read the file sample/status_report_2018 ,
+        and returns:
+          non-work: 0.5
+          non-computer related work: 2+1.5+0.5
+          project management: 0.5+0.5+0.5+0.5+2+0.5
+          computer related work: 2+1+2+4+0.5
+        """
+
+        infile = 'test/status_report.00'
+        expected_result = {
+            'non-work': 0.5,
+            'non-computer related work': 4,
+            'project management': 4.5,
+            'computer related work': 9.5
+        }
+
+        grouped_work_hours = \
+            status_report_stat.getgroupedworkhours(infile)
+
+        self.assertEqual(grouped_work_hours, expected_result)
+
         self.fail('Finish the test!')
 
 if __name__ == '__main__':
