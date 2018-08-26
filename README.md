@@ -11,7 +11,7 @@ There are 4 task categories:
   - project management
   - computer related work
 
-## sample output
+### sample output
 
 ~~~~
 From the past 150 days, you spend time working on:
