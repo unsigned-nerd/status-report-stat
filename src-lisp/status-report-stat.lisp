@@ -1,10 +1,10 @@
 (defmacro prompt-for-input (prompt-message &optional var)
-    `(progn
-       (format t ,prompt-message)
-       (finish-output)
-       ,(if (null var)
-         `(read-line)
-	       `(setf ,var (read-line)))))
+   `(progn
+     (format t ,prompt-message)
+     (finish-output)
+     ,(if (null var)
+       `(read-line)
+       `(setf ,var (read-line)))))
 
 (defmacro for-line (line in-stream &rest body)
   `(loop for ,line = (read-line ,in-stream nil 'eof)
