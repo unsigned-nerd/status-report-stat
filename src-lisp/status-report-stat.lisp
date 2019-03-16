@@ -1,4 +1,14 @@
+; {{{ quicklisp initial set up
+; load libraries
+(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+      (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+; }}} quicklisp initial set up
+
 ; {{{ my utils
+(require :cl-ppcre)
+
 (defmacro prompt-for-input (prompt-message &optional var)
    `(progn
      (format t ,prompt-message)
@@ -21,22 +31,17 @@
     (read in)))
 ; }}} my utils
 
-; {{{ quicklisp initial set up
-; load libraries
-(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
-      (user-homedir-pathname))))
-  (when (probe-file quicklisp-init)
-    (load quicklisp-init)))
-; }}} quicklisp initial set up
-
-(require :cl-ppcre)
-
 ; the program starts here
 
-(let ((work-hours-ht (make-hash-table))
+; There are 4 categories of work which are non-work, non-computer related work, project management
+; and computer-related work.  We create a work-hours-ht hashtable to store the sum of the work hours
+; of each work category by using the work cateogry as the key.  We loop through the work log input
+; file line by line.  When we match (with regular expression) the starting point of each work
+; category, we use a variable, cur-work-cat-key, to remember what the current work category is.
+; When we match the "time estimation" line, we add the work hours into that work-hours-ht hashtable
+; using the value of cur-work-cat-key as the key.
 
-      ; the current work category key which is changed everytime we encounter a starting of the
-      ; new work category
+(let ((work-hours-ht (make-hash-table))
       (cur-work-cat-key)
 
       ; regex scanners
