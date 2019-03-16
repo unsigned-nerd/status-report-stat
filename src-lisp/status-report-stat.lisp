@@ -1,3 +1,4 @@
+; {{{ my utils
 (defmacro prompt-for-input (prompt-message &optional var)
    `(progn
      (format t ,prompt-message)
@@ -18,12 +19,15 @@
 (defun parse-decimal (in-str)
   (with-input-from-string (in in-str)
     (read in)))
+; }}} my utils
 
+; {{{ quicklisp initial set up
 ; load libraries
 (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
       (user-homedir-pathname))))
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))
+; }}} quicklisp initial set up
 
 (require :cl-ppcre)
 
