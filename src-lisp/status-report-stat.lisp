@@ -7,8 +7,6 @@
 ; }}} quicklisp initial set up
 
 ; {{{ my utils
-(require :cl-ppcre)
-
 (defmacro prompt-for-input (prompt-message &optional var)
    `(progn
      (format t ,prompt-message)
@@ -41,16 +39,20 @@
 ; When we match the "time estimation" line, we add the work hours into that work-hours-ht hashtable
 ; using the value of cur-work-cat-key as the key.
 
+(require :cl-ppcre)
+(import 'cl-ppcre:create-scanner)
+(import 'cl-ppcre:scan)
+(import 'cl-ppcre:register-groups-bind)
+
 (let ((work-hours-ht (make-hash-table))
       (cur-work-cat-key)
 
       ; regex scanners
-      (non-work-regex (cl-ppcre:create-scanner "^non-work"))
-      (non-computer-related-work-regex (cl-ppcre:create-scanner "^non-computer related work"))
-      (project-management-regex (cl-ppcre:create-scanner "^project management"))
-      (computer-related-work-regex (cl-ppcre:create-scanner "^computer related work"))
-      (time-estimation-regex (cl-ppcre:create-scanner
-        "^[ ]*time estimation:[ ]*([0-9.]+)[ ]*hour.*")))
+      (non-work-regex (create-scanner "^non-work"))
+      (non-computer-related-work-regex (create-scanner "^non-computer related work"))
+      (project-management-regex (create-scanner "^project management"))
+      (computer-related-work-regex (create-scanner "^computer related work"))
+      (time-estimation-regex (create-scanner "^[ ]*time estimation:[ ]*([0-9.]+)[ ]*hour.*")))
 
     ; initilize the hash table with the 4 keys to hold the accumulated total work hours of each work
     ; category
@@ -61,16 +63,16 @@
 
   (with-open-file (in-stream (prompt-for-input "Please enter the status-report file name: "))
     (for-line line in-stream
-      (cond ((cl-ppcre:scan non-work-regex line)
+      (cond ((scan non-work-regex line)
               (setf cur-work-cat-key 'non-work))
-            ((cl-ppcre:scan non-computer-related-work-regex line)
+            ((scan non-computer-related-work-regex line)
               (setf cur-work-cat-key 'non-computer-related-work))
-            ((cl-ppcre:scan project-management-regex line)
+            ((scan project-management-regex line)
               (setf cur-work-cat-key 'project-management))
-            ((cl-ppcre:scan computer-related-work-regex line)
+            ((scan computer-related-work-regex line)
               (setf cur-work-cat-key 'computer-related-work))
-            ((cl-ppcre:scan time-estimation-regex line)
-               (cl-ppcre:register-groups-bind (work-hours) (time-estimation-regex line :sharedp t)
+            ((scan time-estimation-regex line)
+               (register-groups-bind (work-hours) (time-estimation-regex line :sharedp t)
                   (incf (gethash cur-work-cat-key work-hours-ht) (parse-decimal work-hours))))))
 
     (format t "You have spent your time on:~%~
