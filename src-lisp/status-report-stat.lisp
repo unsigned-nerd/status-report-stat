@@ -40,9 +40,7 @@
 ; using the value of cur-work-cat-key as the key.
 
 (require :cl-ppcre)
-(import 'cl-ppcre:create-scanner)
-(import 'cl-ppcre:scan)
-(import 'cl-ppcre:register-groups-bind)
+(import '(cl-ppcre:create-scanner cl-ppcre:scan cl-ppcre:register-groups-bind))
 
 (let ((work-hours-ht (make-hash-table))
       (cur-work-cat-key)
