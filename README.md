@@ -20,3 +20,8 @@ From the past 150 days, you spend time working on:
   - project management for 108 hours (20.06%)
   - computer related work for 50 hours (9.29%)
 ~~~~
+
+## install & run
+- install quicklisp
+- from quicklisp, install cl-ppcre for regular expression library
+- run: sbcl --script status-report-stat.lisp
