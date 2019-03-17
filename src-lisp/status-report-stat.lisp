@@ -71,15 +71,15 @@
               (setf cur-work-cat-key 'computer-related-work))
             ((scan time-estimation-regex line)
                (register-groups-bind (work-hours) (time-estimation-regex line :sharedp t)
-                  (incf (gethash cur-work-cat-key work-hours-ht) (parse-decimal work-hours))))))
+                  (incf (gethash cur-work-cat-key work-hours-ht) (parse-decimal work-hours)))))))
 
-    (format t "You have spent your time on:~%~
-               ~Cnon-work for ~$ hours~%~
-               ~Cnon-computer related work for ~$ hours~%~
-               ~Cproject management for ~$ hours~%~
-               ~Ccomputer related work for ~$ hours~%"
+  (format t "You have spent your time on:~%~
+             ~Cnon-work for ~$ hours~%~
+             ~Cnon-computer related work for ~$ hours~%~
+             ~Cproject management for ~$ hours~%~
+             ~Ccomputer related work for ~$ hours~%"
 
-      #\tab (gethash 'non-work work-hours-ht)
-      #\tab (gethash 'non-computer-related-work work-hours-ht)
-      #\tab (gethash 'project-management work-hours-ht)
-      #\tab (gethash 'computer-related-work work-hours-ht))))
+    #\tab (gethash 'non-work work-hours-ht)
+    #\tab (gethash 'non-computer-related-work work-hours-ht)
+    #\tab (gethash 'project-management work-hours-ht)
+    #\tab (gethash 'computer-related-work work-hours-ht)))
