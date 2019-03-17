@@ -54,10 +54,10 @@
 
     ; initialize the hash table with the 4 keys to hold the accumulated total work hours of each
     ; work category
-    (setf (gethash 'non-work work-hours-ht) 0)
-    (setf (gethash 'non-computer-related-work work-hours-ht) 0)
-    (setf (gethash 'project-management work-hours-ht) 0)
-    (setf (gethash 'computer-related-work work-hours-ht) 0)
+    (setf (gethash 'non-work work-hours-ht) 0
+          (gethash 'non-computer-related-work work-hours-ht) 0
+          (gethash 'project-management work-hours-ht) 0
+          (gethash 'computer-related-work work-hours-ht) 0)
 
   (with-open-file (in-stream (prompt-for-input "Please enter the status-report file name: "))
     (for-line line in-stream
